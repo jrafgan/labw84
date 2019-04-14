@@ -4,11 +4,6 @@ const bcrypt = require('bcrypt');
 
 
 const TaskSchema = new Schema({
-    task: {
-        type: String,
-        required: true,
-        unique: true
-    },
     user: {
         type: String,
         required: true,
@@ -21,6 +16,10 @@ const TaskSchema = new Schema({
     status: {
         type: String,
         required: true,
-        enum: ['new', 'in_progress', 'complete']
+        status: ['new', 'in_progress', 'complete']
     }
 });
+
+const Task = mongoose.model('Task', TaskSchema);
+
+module.exports = Task;

@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const config = require('./config');
+const User = require('./models/User');
+const Task = require('./models/Task');
 
 const run = async () => {
     await mongoose.connect(config.dbUrl, config.mongoOptions);
@@ -12,25 +14,24 @@ const run = async () => {
         await collection.drop();
     }
 
-    const [cpus, hdds] = await Category.create(
-        {title: 'CPUs', description: 'Central Processing Unit'},
-        {title: 'HDDs', description: 'Hard Disk Drives'}
-    );
+    const [user1, user2] = await User.create(
+        {username : "John4", password : "$2b$10$MSJeGperni7DdxnW8YTh9.q5Gguerk/n/ZgxoxGcr/AExEfUjCLOm", "__v" : 0, token : "zq40zsgqz9kShAnW3FewJ" },
+    {username : "John5", password : "$2b$10$BMOShuy43WAiHORwzytCrehPLYieEzMkaz0LmOKuq1beOmarhHGOi", token : "yHlLc0Ni_hK1yMorAJ9IW", "__v" : 0 }
 
-    await Product.create(
+);
+
+    await Task.create(
         {
-            title: 'Intel Core i7',
-            price: 500,
-            description: 'Very coolCPU',
-            category: cpus.title,
-            image: 'cpu.jpg'
+            user: user1._id,
+            title: 'Buy a bicycle',
+            description: 'mountain bike',
+            status: 'new'
         },
         {
-            title: 'Toshiba 500 GB',
-            price: 60,
-            description: 'A simple HDD',
-            category: hdds._id,
-            image: 'hdd.jpg'
+            user: user2._id,
+            title: 'Get a job',
+            description: 'find job with a good salary',
+            status: 'new'
         }
     );
 
