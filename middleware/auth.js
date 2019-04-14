@@ -1,6 +1,6 @@
 const auth = async (req, res, next)=> {
 
-    console.log()
+    console.log("");
 
     next();
 };
