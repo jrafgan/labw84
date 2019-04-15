@@ -5,10 +5,10 @@ const auth =require('../middleware/auth');
 
 router.post('/', async (req, res) => {
     const user = new User(req.body);
-
+    user.generateToken();
     try {
         await user.save();
-        return res.send(user);
+        return res.send({token: user.token});
 
     } catch (error) {
         return res.status(400).send(error)
@@ -16,16 +16,15 @@ router.post('/', async (req, res) => {
 
 });
 
-router.post('/sessions', async (req, res) => {
-    const user = await User.findOne({username: req.body.username});
-    if (!user) {
-        return res.status(400).send({error: 'Username not found'});
-    }
-    const isMatch = await user.checkPassword(req.body.password);
+router.post('/sessions', auth, async (req, res) => {
+
+    const user = new User(req.user);
+    const isMatch = await user.checkPassword(user.password);
     if (!isMatch) {
-        return res.status(400).send({error: 'Password is incorrect'});
+        return res.status(400).send({error: 'Username/Password is incorrect'});
     }
     res.send({message: 'Username and password correct!'})
+
 });
 
 module.exports = router;
