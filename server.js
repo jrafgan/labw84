@@ -10,7 +10,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const port = 8003;
+const port = 8001;
 
 mongoose.connect(config.dbUrl, config.mongoOptions).then(() => {
     app.use('/tasks', tasks);
