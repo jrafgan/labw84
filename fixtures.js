@@ -15,10 +15,19 @@ const run = async () => {
     }
 
     const [user1, user2] = await User.create(
-        {username : "John4", password : "$2b$10$MSJeGperni7DdxnW8YTh9.q5Gguerk/n/ZgxoxGcr/AExEfUjCLOm", "__v" : 0, token : "zq40zsgqz9kShAnW3FewJ" },
-    {username : "John5", password : "$2b$10$BMOShuy43WAiHORwzytCrehPLYieEzMkaz0LmOKuq1beOmarhHGOi", token : "yHlLc0Ni_hK1yMorAJ9IW", "__v" : 0 }
-
-);
+        {
+            username: "John1",
+            password: "123",
+            token: "zq40zsgqz9kShAnW3FewJ",
+            __v : 0
+        },
+        {
+            username: "John2",
+            password: "1234",
+            token: "yHlLc0Ni_hK1yMorAJ9IW",
+            __v: 0
+        }
+    );
 
     await Task.create(
         {
