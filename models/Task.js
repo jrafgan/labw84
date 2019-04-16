@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const bcrypt = require('bcrypt');
-
 
 const TaskSchema = new Schema({
     user: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'User',
         required: true,
     },
     title: {
@@ -16,7 +15,7 @@ const TaskSchema = new Schema({
     status: {
         type: String,
         required: true,
-        status: ['new', 'in_progress', 'complete']
+        enum: ['new', 'in_progress', 'complete']
     }
 });
 
